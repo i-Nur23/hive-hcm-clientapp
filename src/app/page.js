@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className="auth-page">
       <p className="font-sans">Main page</p>
