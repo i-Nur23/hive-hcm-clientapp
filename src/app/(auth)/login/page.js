@@ -1,5 +1,6 @@
 "use client"
 
+import { AuthApi } from "@/api";
 import { DangerAlert } from "@/components/alerts";
 import { EmailInput, PasswordInput } from "@/components/inputs";
 import Link from "next/link";
@@ -19,11 +20,35 @@ export default function Login () {
     setOpen(false)
     console.log(email)
 
-    if (email === "" || password === ""){
+    if (!email|| !password){
       console.log("empty")
       setAlertText("Заполните все поля")
       setOpen(true)
+      return;
     }
+
+    AuthApi.login(email, password)
+    .catch(error => {
+      const status = error.response.status
+
+      setOpen(true)
+
+      if (status < 500){
+        setAlertText(error.response.data);
+      }
+      else {
+        setAlertText("Ошибка сервера. Пожалуйста подождите")
+      }
+
+
+    })
+    .then(response => {
+      if (!response){
+        return;
+      }
+      
+      console.log(response)
+    });
   }
 
   return (

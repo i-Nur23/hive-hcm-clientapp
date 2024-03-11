@@ -1,5 +1,6 @@
 "use client"
 
+import { AuthApi } from "@/api";
 import { DangerAlert } from "@/components/alerts";
 import { TextInput, EmailInput, PasswordInput } from "@/components/inputs";
 import Link from "next/link";
@@ -25,6 +26,29 @@ export default function Registration () {
       setAlertText("Заполните все поля")
       setOpen(true)
     }
+
+    AuthApi.register(name, surname, company, email, password)
+    .catch(error => {
+      const status = error.response.status
+
+      setOpen(true)
+
+      if (status < 500){
+        setAlertText(error.response.data);
+      }
+      else {
+        setAlertText("Ошибка сервера. Пожалуйста подождите")
+      }
+
+
+    })
+    .then(response => {
+      if (!response){
+        return;
+      }
+      
+      console.log(response)
+    });
   }
 
   return (
