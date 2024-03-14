@@ -15,6 +15,10 @@ class UserDispatch {
       storage: window.localStorage
     })
   }
+
+  logout = () => {
+    this.user = null;
+  }
 }
 
 export default new UserDispatch()

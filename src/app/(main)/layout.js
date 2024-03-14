@@ -1,5 +1,6 @@
 "use client"
 
+import { Sidebar } from "@/components/navs"
 import userDispatch from "@/store/userDispatch"
 import { observer } from "mobx-react"
 import { redirect } from "next/navigation"
@@ -19,7 +20,14 @@ const MainLayout = observer(({children}) => {
 
   })
 
-  return <>{children}</>
+  return (
+  <>
+    <Sidebar/>
+    <div className="pl-[20%]">
+      {children}
+    </div>
+  </>
+  )
 })
 
 export default MainLayout

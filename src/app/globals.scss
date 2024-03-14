@@ -13,6 +13,7 @@
 
 $input-border: #9ca3af;
 $input-border-focus: #4b5563;
+$hover-gray: #e9e9e9;
 
 .bg-honeycomb {
   background-color: #ffffff;
@@ -44,5 +45,37 @@ button.btn-primary {
 
   &:hover {
     @apply text-yellow-300;
+  }
+}
+
+.side-nav {
+  padding: 10px 0 0 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  border-right: 1px solid $input-border;
+  height: 100vh;
+  width: 20%;
+
+  a, .btn-exit {
+    padding: 1em 1.5em;
+
+    transition: ease-in-out 200ms;
+
+  }
+
+  a {
+    &:hover {
+      background-color: $hover-gray;
+    }
+  }
+
+  a.active {
+    background-color: $hover-gray;
+  }
+
+  .btn-exit {
+    cursor: pointer;
+
   }
 }
