@@ -1,12 +1,18 @@
-import Image from "next/image";
+"use client"
 
-export default function Home(props) {
-  return (
-    <div className="auth-page">
-      <p className="font-sans">Main page</p>
-      <p className="font-serif">Main page</p>
-      <p>Main page</p>
-      <p>Main page</p>
-    </div>
-  );
-}
+import userDispatch from "@/store/userDispatch";
+import { observer } from "mobx-react";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
+
+const Home = observer((props) => {
+  useEffect(() => {
+    if (userDispatch.user === null){
+      redirect('/login')
+    } else {
+      redirect('/dashboard')
+    }
+  }, [])
+})
+
+export default Home

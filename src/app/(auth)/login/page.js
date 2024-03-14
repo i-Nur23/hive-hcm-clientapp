@@ -3,18 +3,22 @@
 import { AuthApi } from "@/api";
 import { DangerAlert } from "@/components/alerts";
 import { EmailInput, PasswordInput } from "@/components/inputs";
+import userDispatch from "@/store/userDispatch";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 
 
-export default function Login () {
+const Login = () => {
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [alertText, setAlertText] = useState();
   const [open, setOpen] = useState(false);
- 
+
   const login = e => {
     e.preventDefault()
     setOpen(false)
@@ -28,26 +32,24 @@ export default function Login () {
     }
 
     AuthApi.login(email, password)
+    .then(response => {
+        userDispatch.user = response.data;
+        router.push("/board")
+    })
     .catch(error => {
+      if (!error.response){
+        console.log(error)
+      }
+
       const status = error.response.status
 
       setOpen(true)
 
-      if (status < 500){
+      if (status < 500) {
         setAlertText(error.response.data);
-      }
-      else {
+      } else {
         setAlertText("Ошибка сервера. Пожалуйста подождите")
       }
-
-
-    })
-    .then(response => {
-      if (!response){
-        return;
-      }
-      
-      console.log(response)
     });
   }
 
@@ -75,7 +77,7 @@ export default function Login () {
             </button>
             <div className="flex gap-1 font-normal">
               <p>или</p>
-              <Link className="border-b border-b-gray-400 hover:border-b-black" href="/registration">добавьте компанию</Link> 
+              <Link className="border-b border-b-gray-400 hover:border-b-black" href="/register">добавьте компанию</Link> 
             </div>
           </form>
         </div>
@@ -88,3 +90,5 @@ export default function Login () {
     </>
   )
 }
+
+export default Login

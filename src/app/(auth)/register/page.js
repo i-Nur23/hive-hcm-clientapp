@@ -5,8 +5,12 @@ import { DangerAlert } from "@/components/alerts";
 import { TextInput, EmailInput, PasswordInput } from "@/components/inputs";
 import Link from "next/link";
 import { useState } from "react"
+import { useRouter } from "next/navigation"; 
+import userDispatch from "@/store/userDispatch";
 
-export default function Registration () {
+const Register = () => {
+
+  const router = useRouter();
 
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -17,7 +21,7 @@ export default function Registration () {
   const [open, setOpen] = useState(false);
   const [alertText, setAlertText] = useState();
 
-  const login = e => {
+  const register = e => {
     e.preventDefault()
     
     setOpen(false);
@@ -28,7 +32,16 @@ export default function Registration () {
     }
 
     AuthApi.register(name, surname, company, email, password)
+    .then(response => {
+      userDispatch.user = response.data;
+      router.push("/board")
+    })
     .catch(error => {
+
+      if (!error.response){
+        console.log(error)
+      }
+
       const status = error.response.status
 
       setOpen(true)
@@ -41,13 +54,6 @@ export default function Registration () {
       }
 
 
-    })
-    .then(response => {
-      if (!response){
-        return;
-      }
-      
-      console.log(response)
     });
   }
 
@@ -59,7 +65,7 @@ export default function Registration () {
           <p className="text-2xl font-bold">HiveHCM</p>
         </div>
         <div className="flex-col w-100 mx-3">
-          <form onSubmit={login}>
+          <form onSubmit={register}>
             <TextInput
               value={name}
               setValue={e => setName(e.target.value)}
@@ -103,3 +109,5 @@ export default function Registration () {
     </>
   )
 }
+
+export default Register
