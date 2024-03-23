@@ -12,7 +12,7 @@ class UserDispatch {
     makePersistable(this, { 
       name: 'UserDispatch',
       properties: ['user'],
-      storage: window.localStorage
+      storage: window?.localStorage
     })
   }
 

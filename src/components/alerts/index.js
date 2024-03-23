@@ -1,5 +1,5 @@
-import DangerAlert from "./DangerAlert";
+import Alert from "./Alert";
 
 export {
-  DangerAlert,
+  Alert,
 }

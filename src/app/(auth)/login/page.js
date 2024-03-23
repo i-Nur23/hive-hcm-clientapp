@@ -1,7 +1,7 @@
 "use client"
 
 import { AuthApi } from "@/api";
-import { DangerAlert } from "@/components/alerts";
+import { Alert } from "@/components/alerts";
 import { EmailInput, PasswordInput } from "@/components/inputs";
 import userDispatch from "@/store/userDispatch";
 import Link from "next/link";
@@ -82,10 +82,11 @@ const Login = () => {
           </form>
         </div>
       </div>
-      <DangerAlert 
-        text={alertText}
+      <Alert 
+        type = "danger"
+        text = {alertText}
         open = {open}
-        onClose={e => setOpen(false)}
+        onClose = {e => setOpen(false)}
       />
     </>
   )

@@ -1,7 +1,7 @@
 "use client"
 
 import { AuthApi } from "@/api";
-import { DangerAlert } from "@/components/alerts";
+import { Alert } from "@/components/alerts";
 import { TextInput, EmailInput, PasswordInput } from "@/components/inputs";
 import Link from "next/link";
 import { useState } from "react"
@@ -101,10 +101,11 @@ const Register = () => {
           </form>
         </div>
       </div>
-      <DangerAlert
-        open={open}
-        onClose={e => setOpen(false)}
-        text={alertText}
+      <Alert
+        type = "danger"
+        open = {open}
+        onClose = {e => setOpen(false)}
+        text = {alertText}
       />
     </>
   )

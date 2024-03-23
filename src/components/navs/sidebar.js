@@ -27,16 +27,16 @@ const Sidebar = () => {
       href: "/board/vacancies"
     },
     {
-      label: "Документы",
-      href: "/board/documents"
-    },
-    {
       label: "Обучение",
       href: "/board/learn"
     },
     {
       label: "Уровень удовлетворенности",
       href: "#"
+    },
+    {
+      label: "Смена пароля",
+      href: "/board/password_change"
     },
   ]
 

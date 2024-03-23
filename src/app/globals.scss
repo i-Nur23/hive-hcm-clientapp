@@ -27,7 +27,7 @@ div.input {
   width: 100%;
   margin-bottom: 1.5rem;
 
-  input {
+  input, button {
     border: 1px solid $input-border;
     border-radius: 10px;
     transition: ease-in-out 200ms;

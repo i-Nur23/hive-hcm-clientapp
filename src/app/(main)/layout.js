@@ -24,7 +24,9 @@ const MainLayout = observer(({children}) => {
   <>
     <Sidebar/>
     <div className="pl-[20%]">
-      {children}
+      <div className="p-7">
+        {children}
+      </div>
     </div>
   </>
   )

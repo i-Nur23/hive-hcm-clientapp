@@ -10,7 +10,7 @@ const Home = observer((props) => {
     if (userDispatch.user === null){
       redirect('/login')
     } else {
-      redirect('/dashboard')
+      redirect('/board')
     }
   }, [])
 })
