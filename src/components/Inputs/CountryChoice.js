@@ -15,6 +15,7 @@ const CountryChoice = ({
   useEffect(() => {
     (
       async () => {
+        console.log("ssss")
         CountriesApi.getAllCountries()
         .then(response => setCountries(response.data))
       }
@@ -25,12 +26,19 @@ const CountryChoice = ({
     <Listbox value={country} onChange={setCountry}>
         <div className="relative input">
           <Listbox.Label className="relative">Страна</Listbox.Label>
-          <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left">
+          <Listbox.Button className="relative w-full cursor-default rounded-lg h-8 bg-white py-2 pl-3 pr-10 text-left">
             <span className="flex gap-2 truncate">
-              <div className="w-[5%] flex flex-col justify-center">
-                <img src={country?.urlPng} className="h-4 border border-gray-400"/>
-              </div>
-              {country?.name}
+              {
+                country 
+                  ? 
+                  (<>
+                    <div className="w-[5%] flex flex-col justify-center">
+                      <img src={country.urlPng} className="h-4 border border-gray-400"/>
+                    </div>
+                    {country.name}
+                  </>)
+                  : null
+              }
             </span>
             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronUpDownIcon

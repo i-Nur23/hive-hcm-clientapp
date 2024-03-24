@@ -9,13 +9,15 @@ export default class UserApi extends BaseApi {
     var body = {
       name: name,
       surname: surname,
-      patronymic: patronymic,
+      patronymic: typeof(patronymic) === "undefined" ? null : patronymic,
       email: email,
-      phoneNumber: phone,
-      countryCode: countryCode,
-      city: city,
-      birthDate: birthdate
+      phoneNumber: typeof(phone) === "undefined" ? null : phone,
+      countryCode: typeof(countryCode) === "undefined" ? null : countryCode,
+      city: typeof(city) === "undefined" ? null : city,
+      birthDate: typeof(birthdate) === "undefined" ? null : birthdate
     }
+
+    console.log(body)
     
     return await axios.post(
       `${this.userServiceUrl}/users/update`,

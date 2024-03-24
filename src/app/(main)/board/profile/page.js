@@ -1,7 +1,6 @@
 "use client"
 
 import { EmployeeApi } from "@/api"
-import CountriesApi from "@/api/CountriesApi"
 import UserApi from "@/api/UserApi"
 import { Alert } from "@/components/alerts"
 import { TextInput, PhoneInput, EmailInput, CountryChoice, PasswordInput, DateInput } from "@/components/inputs"
@@ -9,14 +8,14 @@ import { useEffect, useState } from "react"
 
 const Profile = () => {
   
-  const [name, setName] = useState()
-  const [surname, setSurname] = useState()
-  const [patronymic, setPatronymic] = useState()
-  const [email, setEmail] = useState()
-  const [phoneNumber, setPhoneNumber] = useState()
-  const [country, setCountry] = useState()
-  const [city, setCity] = useState()
-  const [birthdate, setBirthdate] = useState()
+  const [name, setName] = useState(null)
+  const [surname, setSurname] = useState(null)
+  const [patronymic, setPatronymic] = useState(null)
+  const [email, setEmail] = useState(null)
+  const [phoneNumber, setPhoneNumber] = useState(null)
+  const [country, setCountry] = useState(null)
+  const [city, setCity] = useState(null)
+  const [birthdate, setBirthdate] = useState(null)
 
   const [open, setOpen] = useState(false)
   const [alertText, setAlertText] = useState()
@@ -34,7 +33,7 @@ const Profile = () => {
         setPhoneNumber(employee.phoneNumber)
         setCountry(employee.country)
         setCity(employee.city)
-        setBirthdate(employee.birthdate)
+        setBirthdate(employee.birthDate)
       }
     )()
   }, [])
@@ -66,7 +65,7 @@ const Profile = () => {
       const status = error.response.status
 
       if (status < 500) {
-        setAlertText(error.response.data);
+        setAlertText(error.response.data ?? "Ошибка запроса");
       } else {
         setAlertText("Ошибка сервера. Пожалуйста подождите")
       }
