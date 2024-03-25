@@ -5,8 +5,9 @@ import UserApi from "@/api/UserApi"
 import { Alert } from "@/components/alerts"
 import { TextInput, PhoneInput, EmailInput, CountryChoice, PasswordInput, DateInput } from "@/components/inputs"
 import { useEffect, useState } from "react"
+import { resolve } from "styled-jsx/css"
 
-const Profile = () => {
+const Profile = ({loading, setIsLoading}) => {
   
   const [name, setName] = useState(null)
   const [surname, setSurname] = useState(null)
@@ -22,9 +23,8 @@ const Profile = () => {
   const [alertType, setAlertType] = useState("danger")
 
   useEffect(() => {
-    (
-      async () => {
-        var response = await EmployeeApi.getPersonalInfo();
+    EmployeeApi.getPersonalInfo()
+      .then(response => {
         const employee = response.data;
         setName(employee.name)
         setSurname(employee.surname)
@@ -34,8 +34,7 @@ const Profile = () => {
         setCountry(employee.country)
         setCity(employee.city)
         setBirthdate(employee.birthDate)
-      }
-    )()
+      });
   }, [])
 
   const saveInfo = e => {

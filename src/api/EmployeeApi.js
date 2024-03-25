@@ -14,4 +14,16 @@ export default class EmployeeApi extends BaseApi{
       }
     )
   }
+
+  static getUnits = async () => {
+
+    return await axios.get(
+      `${this.employeeServiceUrl}/employees/units`,
+      {
+        headers: {
+          Authorization: 'Bearer ' + userDispatch.user.token
+        }
+      }
+    )
+  }
 }
