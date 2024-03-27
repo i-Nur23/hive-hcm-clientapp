@@ -16,7 +16,7 @@ const Sidebar = () => {
     },
     {
       label: "Сотрудники",
-      href: "/board/employees"
+      href: "/board/units"
     },
     {
       label: "Зарплата",
